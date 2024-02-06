@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "544983639006",
+    "project_id": "kapus-f9efb",
+    "storage_bucket": "kapus-f9efb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544983639006:android:fe20563f01bc535915b34f",
+        "android_client_info": {
+          "package_name": "com.example.kapus"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAq_a_MtF92K-HdoraxKGmjMBPuPGQCri4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
