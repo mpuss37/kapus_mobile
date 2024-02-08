@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.kapus.Handler.UserHandler;
 import com.example.kapus.R;
@@ -31,7 +34,7 @@ public class AddUser extends MainActivity {
             public void onClick(View v) {
                 username = editTextUsername.getText().toString();
                 password = editTextPassword.getText().toString();
-                userHandler.addUser(dbUrl, username, password, AddUser.this);
+                userHandler.addUser(username, password, AddUser.this);
             }
         });
 
@@ -48,7 +51,7 @@ public class AddUser extends MainActivity {
             public void onClick(View v) {
                 username = editTextUsername.getText().toString();
                 password = editTextPassword.getText().toString();
-                userHandler.checkUser(dbUrl, username, password, AddUser.this);
+                userHandler.checkUser(username, password, AddUser.this);
             }
         });
     }

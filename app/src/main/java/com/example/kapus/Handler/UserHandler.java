@@ -5,22 +5,29 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.kapus.Adapter.UserAdapter;
 import com.example.kapus.Model.UserModel;
+import com.example.kapus.View.MainActivity;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class UserHandler extends AppCompatActivity {
-    final private UserModel userModel = new UserModel();
-    private DatabaseReference childUser;
+import java.util.ArrayList;
 
-    public void addUser(DatabaseReference dbUrl, String username, String password, Context context) {
+public class UserHandler extends MainActivity {
+    private UserModel userModel = new UserModel();
+    private DatabaseReference childUser = dbUrl.child("users");
+
+    public void addUser(String username, String password, Context context) {
         if (username.equals("") || password.equals("")) {
             Toast.makeText(context, "kolom kosong", Toast.LENGTH_SHORT).show();
         } else {
-            childUser = dbUrl.child("user");
             userModel.setId_user(childUser.push().getKey());
             userModel.setUsername(username);
             userModel.setPassword(password);
@@ -37,7 +44,7 @@ public class UserHandler extends AppCompatActivity {
         }
     }
 
-    public void checkUser(DatabaseReference dbUrl, String username, String password, Context context) {
+    public void checkUser(String username, String password, Context context) {
         if (username.equals("") || password.equals("")) {
             Toast.makeText(context, "kolom kosong", Toast.LENGTH_SHORT).show();
         } else {
@@ -67,6 +74,12 @@ public class UserHandler extends AppCompatActivity {
             });
         }
     }
-//            ref.child("myDb").child("awais@gmailcom").child("leftSpace").setValue("YourDateHere");
+
+    public void displayUserRv(Context context, UserAdapter userAdapter, RecyclerView recyclerView, FirebaseRecyclerOptions<UserModel> options) {
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        options = new FirebaseRecyclerOptions.Builder<UserModel>().setQuery(childUser, UserModel.class).build();
+        userAdapter = new UserAdapter(options);
+        recyclerView.setAdapter(userAdapter);
+    }
 
 }
