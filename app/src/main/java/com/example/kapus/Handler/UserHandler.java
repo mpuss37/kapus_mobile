@@ -4,7 +4,6 @@ import android.content.Context;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,14 +14,11 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 public class UserHandler extends MainActivity {
     private UserModel userModel = new UserModel();
-    private DatabaseReference childUser = dbUrl.child("users");
+    protected DatabaseReference childUser = dbUrl.child("users");
 
     public void addUser(String username, String password, Context context) {
         if (username.equals("") || password.equals("")) {
@@ -48,7 +44,6 @@ public class UserHandler extends MainActivity {
         if (username.equals("") || password.equals("")) {
             Toast.makeText(context, "kolom kosong", Toast.LENGTH_SHORT).show();
         } else {
-            childUser = dbUrl.child("users");
             childUser.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -73,13 +68,6 @@ public class UserHandler extends MainActivity {
                 }
             });
         }
-    }
-
-    public void displayUserRv(Context context, UserAdapter userAdapter, RecyclerView recyclerView, FirebaseRecyclerOptions<UserModel> options) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        options = new FirebaseRecyclerOptions.Builder<UserModel>().setQuery(childUser, UserModel.class).build();
-        userAdapter = new UserAdapter(options);
-        recyclerView.setAdapter(userAdapter);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.kapus.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -11,20 +12,19 @@ import com.example.kapus.Model.UserModel;
 import com.example.kapus.R;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
-public class MenuUser extends AppCompatActivity {
+public class MenuUser extends UserHandler {
     private RecyclerView recyclerView;
-    private UserHandler userHandler;
     private UserAdapter userAdapter;
-    private FirebaseRecyclerOptions<UserModel> options;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_user);
-        userHandler = new UserHandler();
         recyclerView = findViewById(R.id.rvUser);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        FirebaseRecyclerOptions<UserModel> options = new FirebaseRecyclerOptions.Builder<UserModel>().setQuery(childUser, UserModel.class).build();
         userAdapter = new UserAdapter(options);
-        userHandler.displayUserRv(this, userAdapter, recyclerView, options);
+        recyclerView.setAdapter(userAdapter);
     }
 
     @Override
