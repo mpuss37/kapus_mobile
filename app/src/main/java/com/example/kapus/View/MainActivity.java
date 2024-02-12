@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonSave;
     private TextView textViewSignIn;
     private EditText editTextUsername, editTextPassword;
-    private String username, password;
+    private String username, password, id_user = null;
     protected UserHandler userHandler;
     final protected DatabaseReference dbUrl = FirebaseDatabase.getInstance().getReferenceFromUrl("https://kapus-f9efb-default-rtdb.firebaseio.com/");
     protected Intent intent;
@@ -36,23 +36,15 @@ public class MainActivity extends AppCompatActivity {
         textViewSignIn = findViewById(R.id.textViewSignIn);
         editTextUsername = findViewById(R.id.editTextUsername);
         editTextPassword = findViewById(R.id.editTextPassword);
-
-        username = editTextUsername.getText().toString();
-        password = editTextPassword.getText().toString();
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (buttonSave.getText().equals("LOGIN")){
+                username = editTextUsername.getText().toString();
+                password = editTextPassword.getText().toString();
+                if (buttonSave.getText().equals("LOGIN")) {
                     userHandler.checkUser(username, password, MainActivity.this);
-                    intent = new Intent(MainActivity.this, MenuUser.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                    intent.putExtra("key_id_user", id_user);
-                    startActivity(intent);
-                    finish();
-                }else {
+                } else {
                     userHandler.insertUser(username, password, MainActivity.this);
-                    editTextUsername.setText("");
-                    editTextPassword.setText("");
                 }
             }
         });
@@ -60,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         textViewSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (textViewSignIn.getText().equals("new account")){
+                if (textViewSignIn.getText().equals("new account")) {
                     buttonSave.setText("REGISTER");
                     textViewSignIn.setText("have account");
                 } else if (textViewSignIn.getText().equals("have account")) {

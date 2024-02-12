@@ -17,6 +17,7 @@ public class UserHandler extends MainActivity {
     private UserModel userModel = new UserModel();
     protected DatabaseReference childUser = dbUrl.child("users");
     protected DatabaseReference childData = dbUrl.child("data");
+    private String key;
 
     public void insertUser(String username, String password, Context context) {
         if (username.equals("") || password.equals("")) {
@@ -53,7 +54,7 @@ public class UserHandler extends MainActivity {
         }
     }
 
-    public void checkUser(String username, String password, Context context) {
+    public String checkUser(String username, String password, Context context) {
         if (username.equals("") || password.equals("")) {
             Toast.makeText(context, "kolom kosong", Toast.LENGTH_SHORT).show();
         } else {
@@ -65,8 +66,8 @@ public class UserHandler extends MainActivity {
                     } else {
                         if (snapshot.child(username).exists()) {
                             if (snapshot.child(username).child("password").getValue(String.class).equals(password)) {
-                                String key = snapshot.child(username).child("id_user").getValue(String.class);
-                                Toast.makeText(context, "user/pass benar"+key, Toast.LENGTH_SHORT).show();
+                                key = snapshot.child(username).child("id_user").getValue(String.class);
+                                Toast.makeText(context, "user/pass benar", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(context, "user/pass salah", Toast.LENGTH_SHORT).show();
                             }
@@ -82,6 +83,7 @@ public class UserHandler extends MainActivity {
                 }
             });
         }
+        return key;
     }
 
     public void idUser(String username, String password, Context context){
