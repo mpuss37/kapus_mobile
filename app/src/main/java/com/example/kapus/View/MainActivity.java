@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 password = editTextPassword.getText().toString();
                 if (buttonSave.getText().equals("LOGIN")) {
                     userHandler.checkUser(username, password, MainActivity.this);
-                } else {
+                }else {
                     userHandler.insertUser(username, password, MainActivity.this);
                 }
             }
