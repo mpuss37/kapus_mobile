@@ -5,16 +5,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.kapus.Handler.UserHandler;
 import com.example.kapus.R;
 
 public class AddUser extends MainActivity {
-    private EditText editTextUsername, editTextPassword;
-    private String username, password;
+    private EditText editTextUsername, editTextPassword, editTextEmail, editTextNamaLengkap, editTextAlamat;
+    private String username, password, email, namalengkap, alamat;
     private Button buttonSave, buttonUpdate, buttonCheck;
     private UserHandler userHandler = new UserHandler();
 
@@ -25,6 +22,9 @@ public class AddUser extends MainActivity {
 
         editTextUsername = findViewById(R.id.editTextUsername);
         editTextPassword = findViewById(R.id.editTextPassword);
+        editTextEmail = findViewById(R.id.editTextEmail);
+        editTextNamaLengkap = findViewById(R.id.editTextNamaLengkap);
+        editTextAlamat = findViewById(R.id.editTextAlamat);
         buttonSave = findViewById(R.id.button2);
         buttonUpdate = findViewById(R.id.button3);
         buttonCheck = findViewById(R.id.button4);
@@ -34,7 +34,10 @@ public class AddUser extends MainActivity {
             public void onClick(View v) {
                 username = editTextUsername.getText().toString();
                 password = editTextPassword.getText().toString();
-                userHandler.addUser(username, password, AddUser.this);
+                email = editTextEmail.getText().toString();
+                namalengkap = editTextNamaLengkap.getText().toString();
+                alamat = editTextAlamat.getText().toString();
+                userHandler.insertUser(username, password, AddUser.this);
             }
         });
 
