@@ -1,12 +1,16 @@
 package com.example.kapus.Handler;
 
 import android.content.Context;
+import android.content.Intent;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.example.kapus.Model.UserModel;
+import com.example.kapus.View.AddUser;
 import com.example.kapus.View.MainActivity;
+import com.example.kapus.View.MenuUser;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,7 +21,7 @@ public class UserHandler extends MainActivity {
     private UserModel userModel = new UserModel();
     protected DatabaseReference childUser = dbUrl.child("users");
     protected DatabaseReference childData = dbUrl.child("data");
-    private String key;
+    private String key = null;
 
     public void insertUser(String username, String password, Context context) {
         if (username.equals("") || password.equals("")) {
@@ -30,6 +34,11 @@ public class UserHandler extends MainActivity {
                 @Override
                 public void onSuccess(Void unused) {
                     Toast.makeText(context, "data berhasil masuk", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(context, "data gagal", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -54,7 +63,7 @@ public class UserHandler extends MainActivity {
         }
     }
 
-    public String checkUser(String username, String password, Context context) {
+    public String checkUser(String username, String password, Context context, String menu) {
         if (username.equals("") || password.equals("")) {
             Toast.makeText(context, "kolom kosong", Toast.LENGTH_SHORT).show();
         } else {
@@ -84,12 +93,6 @@ public class UserHandler extends MainActivity {
             });
         }
         return key;
-    }
-
-    public void idUser(String username, String password, Context context){
-        if (username.equals("") || password.equals("")){
-
-        }
     }
 
 }

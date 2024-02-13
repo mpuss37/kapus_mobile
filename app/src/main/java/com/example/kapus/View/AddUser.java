@@ -54,7 +54,7 @@ public class AddUser extends MainActivity {
             public void onClick(View v) {
                 username = editTextUsername.getText().toString();
                 password = editTextPassword.getText().toString();
-                userHandler.checkUser(username, password, AddUser.this);
+                userHandler.checkUser(username, password, AddUser.this, null);
             }
         });
     }

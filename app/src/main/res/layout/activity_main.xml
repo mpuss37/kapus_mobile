@@ -12,6 +12,7 @@
     tools:context=".View.MainActivity">
 
     <com.google.android.material.textfield.TextInputLayout
+        app:passwordToggleEnabled="true"
         android:id="@+id/textInputLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:text="anjay" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -87,7 +89,8 @@
             android:id="@+id/editTextUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="username" />
+            android:hint="username"
+            android:text="pebalap" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
